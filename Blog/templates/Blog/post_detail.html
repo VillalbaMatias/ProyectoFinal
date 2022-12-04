@@ -1,0 +1,29 @@
+{% extends 'index.html' %}
+
+{% load static %}
+
+
+{% block formularioDinamico %}
+<img src="{{post.imagen.url}}" style="width:10%">
+<h1>{{post.titulo}}</h1>
+<small> 
+    {{post.post_date}} - {{post.categoria}} - {{post.autor.first_name}}{{post.autor.last_name}} - {{post.titulo_tag}}
+
+</small>
+    {{post.cuerpo | safe }}
+
+<button>
+    <a href="{% url 'ListPost' %}"> Regresar</a>
+</button>
+
+{% if user.id == post.autor.id %}
+    <button>
+        <a href="{% url 'Delete' post.id %}"> Eliminar</a>
+    </button>
+    <button>
+        <a href="{% url 'Update' post.id %}">Actualizar</a>
+
+    </button>
+{% endif %}
+
+{% endblock %}

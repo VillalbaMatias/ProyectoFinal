@@ -1,0 +1,52 @@
+<style>
+    .card {
+        /* Add shadows to create the "card" effect */
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        transition: 0.3s;
+    }
+    
+    /* On mouse-over, add a deeper shadow */
+    .card:hover {
+        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    }
+    
+    /* Add some padding inside the card container */
+    .container {
+        padding: 2px 16px;
+        content: 0px 0px 0px 00px;
+    }
+    img {
+        border-radius: 5px 5px 0 0;
+    }
+</style>
+{% extends 'index.html' %}
+{% load static %}
+
+{% block formularioDinamico %}
+    <div class="card">
+        {% for post in object_list %}
+            <ul>
+                <li>
+                    <img src="{{post.imagen.url}}" style="width:10%">
+                        <div class="container">
+                            {{post.titulo}}, {{post.autor}}
+
+                            <button>
+                                <a href="{% url 'Detail' post.id %}"> Detalle</a>
+                            </button>
+                            {% if user.id == post.autor.id  %}
+                                <button>
+                                    <a href="{% url 'Delete' post.id %}"> Eliminar</a>
+                                </button>
+                                <button>
+                                    <a href="{% url 'Update' post.id %}">Actualizar</a>
+                                </button>  
+                            {% endif %}
+                </li>
+            </ul>
+        {% endfor %}
+    <div/>   
+
+        
+
+{% endblock %}

@@ -1,0 +1,23 @@
+<style>
+    .helptext {
+        visibility: hidden;
+    }
+    ul {
+        display: none;
+    }
+
+</style>
+
+{% extends 'index.html' %}
+
+
+{% load static %}
+
+{% block formularioDinamico %}
+
+    <h1> Actualizar perfil </h1>
+    <form action="" method="post">{% csrf_token %}
+        {{form.as_p}}
+        <button type="submit">Actualizar</button>
+    </form>
+{% endblock %}
