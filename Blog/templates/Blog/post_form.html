@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block formularioDinamico %}
-
+    <h1> Creacion de Post </h1>
     <form action="" method="post" enctype="multipart/form-data">{% csrf_token %}
         {{form.media}}
         {{form.as_p}}

@@ -24,13 +24,21 @@
                 <a class="btn btn-primary" href="{% url 'AddPost' %}">Agregar Post</a>
                 <a class="btn btn-primary" href="{% url 'ListPost' %}">Ver Posts</a>
                 <a class="btn btn-primary" href="{% url 'EditUser' %}">Modificar Perfil</a>
-
-                {% if request.user.is_superuser %}
-                <a class="btn btn-primary" href="{% url 'admin:index' %}">Admin</a>
-                {% endif %}
-
                 {% if request.user.is_authenticated %}
-                    <a class="btn btn-primary" href="{% url 'Logout' %}">Logout</a>
+                    <div class="dropdown">
+                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                            {{user.username}}
+                        </a>
+                        
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <li><a class="dropdown-item" href="#">Perfil</a></li>
+                            <li><a class="dropdown-item" href="{% url 'changePassword' %}">Cambio de Clave</a></li>
+                            {% if request.user.is_superuser %}
+                            <li><a class="dropdown-item" href="{% url 'admin:index' %}">Admin</a></li>
+                            {% endif %}
+                            <li><a class="dropdown-item" href="{% url 'Logout' %}">Logout</a></li>
+                        </ul>
+                    </div>
                 {% else %}
                     <a class="btn btn-primary" href="{% url 'Register' %}">Registrarse</a>
                     <a class="btn btn-primary" href="{% url 'Login' %}">Login</a>
@@ -46,25 +54,28 @@
                 <div class="row">
                     <div class="col-lg-6 h-100 text-center text-lg-start my-auto">
                         <ul class="list-inline mb-2">
-                            <li class="list-inline-item"><a href="#!">About</a></li>
+                            <li class="list-inline-item"><a href="{% url 'AboutUs' %}">About</a></li>
                             <li class="list-inline-item">⋅</li>
-                            <li class="list-inline-item"><a href="#!">Contact</a></li>
+                            <li class="list-inline-item"><a href="{% url 'InCreation' %}">Contact</a></li>
                             <li class="list-inline-item">⋅</li>
-                            <li class="list-inline-item"><a href="#!">Terms of Use</a></li>
+                            <li class="list-inline-item"><a href="{% url 'InCreation' %}">Terms of Use</a></li>
                             <li class="list-inline-item">⋅</li>
-                            <li class="list-inline-item"><a href="#!">Privacy Policy</a></li>
+                            <li class="list-inline-item"><a href="{% url 'InCreation' %}">Privacy Policy</a></li>
                         </ul>
                         <p class="text-muted small mb-4 mb-lg-0">&copy; Your Website 2022. All Rights Reserved.</p>
                     </div>
                     <div class="col-lg-6 h-100 text-center text-lg-end my-auto">
                         <ul class="list-inline mb-0">
                             <li class="list-inline-item me-4">
+                                <a href="https://www.linkedin.com/in/matias-villalba-portunato-68b21b176/"><i class="bi bi-linkedin"></i></a>
+                            </li>
+                            <li class="list-inline-item me-4">
                                 <a href="#!"><i class="bi-facebook fs-3"></i></a>
                             </li>
                             <li class="list-inline-item me-4">
                                 <a href="#!"><i class="bi-twitter fs-3"></i></a>
                             </li>
-                            <li class="list-inline-item">
+                            <li class="list-inline-item me-4">
                                 <a href="#!"><i class="bi-instagram fs-3"></i></a>
                             </li>
                         </ul>

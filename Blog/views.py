@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.http import HttpRequest
 
 
 from django.views.generic import ListView
@@ -8,13 +9,14 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy #redireccion
 
 from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.auth.views import PasswordChangeView
 
-from .forms import  SingUpForm, UserEditForm
+from .forms import  SingUpForm, UpdateUserForm,CambioPasswordForm
 from .models import Post, Categoria, Autor
 
-def mostrar_herencia(request):
-    return render(request,'herencia.html')
-
+from .forms import UpdateUserForm
+from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 #Registro de usuario 
 class SingUpView(CreateView):
@@ -28,6 +30,7 @@ class SingUpView(CreateView):
 class AdminLoginView(LoginView):
 
     template_name = 'Login_Logout_Register/login.html'
+
 
 #Deslogueo de sesion en el blog
 class AdmingLogoutView(LogoutView):
@@ -58,6 +61,11 @@ class PostUpdateView(UpdateView):
 class PostDeleteView(DeleteView):
     model = Post
     success_url = 'Blog/post_list.html'
+    
+class AutorCreateView(CreateView):
+    model = Autor
+    success_url = reverse_lazy('Home')
+    fields = ['username','nombre','apellido','correo','fecha_creacion']
 
 
 #Vista basada en funcion, vista se encarga de poder editar el usuario logueado
@@ -97,4 +105,35 @@ def editar_usuario(request):
         'username': usuario
     })
 
+class UpdateUserView(LoginRequiredMixin, SuccessMessageMixin,UpdateView):
+    form_class = UpdateUserForm
+    login_url = 'login'
+    template_name = "Autores/profile_update.html"
+    success_url = reverse_lazy('Home')
+    success_message = "User updated"
 
+    def get_object(self):
+        return self.request.user
+
+    
+
+class PasswordChangeView(LoginRequiredMixin, PasswordChangeView):
+    form_class = CambioPasswordForm
+    login_url = 'login'
+    success_url = reverse_lazy('password_success')
+
+def password_success(request):
+    return render(request, "Autores/password_change_success.html")
+
+
+
+class Blog(HttpRequest):
+
+    def about_us(request):
+        return render(request,'Informacion/about.html')
+
+    def mostrar_herencia(request):
+        return render(request,'Informacion/herencia.html')
+
+    def en_creacion(request):
+            return render(request,'Informacion/en_creacion.html')
