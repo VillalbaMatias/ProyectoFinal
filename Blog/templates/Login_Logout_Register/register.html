@@ -4,6 +4,9 @@
 {% load static %}
 
 {% block formularioDinamico %}
+
+
+
 <h1>Formulario de Registro</h1>
 <div class="card-body card-block">
         <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">{% csrf_token %}
@@ -13,5 +16,7 @@
                 <button type="submit">Registrarse</button>
             </div>
         </form>
-    </div>
+</div>
+
+
 {% endblock %}

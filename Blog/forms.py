@@ -1,9 +1,7 @@
 from django import forms
-from .models import Post, Autor, Categoria
+from .models import Post, Autor
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, PasswordChangeForm
-from django.forms import HiddenInput
-
 
 class SingUpForm(UserCreationForm):
 
@@ -29,9 +27,12 @@ class SingUpForm(UserCreationForm):
 class CrearPostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = '__all__'
-
-
+        fields = ['titulo','autor','cuerpo','imagen','post_date','categoria']
+        widgets = {
+            'autor': forms.TextInput(attrs={'value':'', 'id':'autor', 'type':'hidden'})
+            
+        }
+#Formulario para actualizar el perfil del usuario
 class UpdateUserForm(UserChangeForm):
 
     email = forms.EmailField(
@@ -60,7 +61,7 @@ class UpdateUserForm(UserChangeForm):
         model = Autor
         fields = ['username', 'first_name', "last_name", 'email']
 
-
+#Formulario de cambio de contraseña
 class CambioPasswordForm(PasswordChangeForm):
     old_password = forms.CharField(
         widget=forms.PasswordInput(attrs={

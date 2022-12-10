@@ -19,7 +19,6 @@ class Categoria(models.Model):
 
 class Post(models.Model):
     titulo = models.CharField('Titulo',max_length=255)
-    titulo_tag = models.CharField('Tag',max_length=255)
     autor = models.ForeignKey(User, on_delete=models.CASCADE)
     cuerpo = RichTextField('Cuerpo',blank=True, null=True)
     post_date = models.DateField('Fecha de Creacion',default=timezone.now)

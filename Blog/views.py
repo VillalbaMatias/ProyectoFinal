@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpRequest
-
+from django.shortcuts import redirect
 
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
@@ -11,20 +11,23 @@ from django.urls import reverse_lazy #redireccion
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.views import PasswordChangeView
 
-from .forms import  SingUpForm, UpdateUserForm,CambioPasswordForm
+from .forms import  SingUpForm, UpdateUserForm,CambioPasswordForm,CrearPostForm
 from .models import Post, Categoria, Autor
+from django.contrib.auth.models import User
 
 
 from .forms import UpdateUserForm
 from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 #Registro de usuario 
-class SingUpView(CreateView):
+class SingUpView(SuccessMessageMixin, CreateView):
 
     form_class = SingUpForm
     success_url = reverse_lazy('Login')
     template_name = 'Login_Logout_Register/register.html'
+    success_message = 'Usuario registrado correctamente, favor de colocar el usuario y contraseña'
 
 #Inicio de sesion en el blog
 
@@ -39,10 +42,14 @@ class AdmingLogoutView(LogoutView):
     template_name = 'Login_Logout_Register/logout.html'
 
 #Creacion de post
-class PostCreateView(CreateView):
-    model = Post
-    success_url = reverse_lazy('Home')
-    fields = ['titulo','titulo_tag','autor','cuerpo','imagen','post_date','categoria']
+class PostCreateView(SuccessMessageMixin, CreateView):
+    form_class = CrearPostForm
+    template_name = "Blog/post_form.html"
+    success_url = reverse_lazy('ListPost')
+    success_message = 'Post creado correctamente'
+    def form_invalid(self, form):
+        messages.add_message(self.request, messages.ERROR, "Revisar nuevamente los datos ingresados")
+        return redirect('AddPost')
 
 #Visualizacion de Posts creados
 class PostList(ListView):
@@ -57,7 +64,7 @@ class PostDetailView(DetailView):
 class PostUpdateView(UpdateView):
     model = Post
     success_url = 'Blog/post_detail.html'
-    fields = ['titulo','titulo_tag','autor','cuerpo','imagen','post_date','categoria']
+    fields = ['titulo','autor','cuerpo','imagen','post_date','categoria']
 
 class PostDeleteView(DeleteView):
     model = Post
@@ -70,20 +77,16 @@ class UpdateUserView(LoginRequiredMixin, SuccessMessageMixin,UpdateView):
     login_url = 'login'
     template_name = "Autores/profile_update.html"
     success_url = reverse_lazy('Home')
-    success_message = "User updated"
+    success_message = "Usuario actualizado"
 
     def get_object(self):
         return self.request.user
 
-class DeleteUserView(LoginRequiredMixin, SuccessMessageMixin,DeleteView):
-    form_class = UpdateUserForm
-    login_url = 'login'
-    template_name = "Autores/profile_update.html"
+
+class DeleteUserView(DeleteView):
+    model = User
+    template_name = "Autores/delete_autor_confirm.html"
     success_url = reverse_lazy('Home')
-    success_message = "User updated"
-
-    def get_object(self):
-        return self.request.user
     
 
 class PasswordChangeView(LoginRequiredMixin, PasswordChangeView):
