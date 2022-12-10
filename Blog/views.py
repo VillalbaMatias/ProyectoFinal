@@ -14,6 +14,7 @@ from django.contrib.auth.views import PasswordChangeView
 from .forms import  SingUpForm, UpdateUserForm,CambioPasswordForm
 from .models import Post, Categoria, Autor
 
+
 from .forms import UpdateUserForm
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -61,50 +62,9 @@ class PostUpdateView(UpdateView):
 class PostDeleteView(DeleteView):
     model = Post
     success_url = 'Blog/post_list.html'
-    
-class AutorCreateView(CreateView):
-    model = Autor
-    success_url = reverse_lazy('Home')
-    fields = ['username','nombre','apellido','correo','fecha_creacion']
 
 
-#Vista basada en funcion, vista se encarga de poder editar el usuario logueado
-def editar_usuario(request):
-
-    usuario = request.user
-
-    if request.method == 'POST':
-        usuario_form = UserEditForm(request.POST)
-
-        if usuario_form.is_valid():
-
-            informacion = usuario_form.cleaned_data
-
-            usuario.username = informacion['username']
-            usuario.email = informacion['email']
-            usuario.first_name = informacion['first_name']
-            usuario.last_name = informacion['last_name']
-            usuario.password1 = informacion['password1']
-            usuario.password2 = informacion['password2']
-            
-
-            usuario.save()
-
-            return render(request, 'herencia.html')
-
-    else:
-        usuario_form = UserEditForm(initial={
-            'username': usuario.username,
-            'email': usuario.email,
-            'first_name': usuario.first_name,
-            'last_name':usuario.last_name
-        })
-
-    return render(request, 'Blog/profile_update.html', {
-        'form': usuario_form,
-        'username': usuario
-    })
-
+#Actualiza la informacion basica del usuario
 class UpdateUserView(LoginRequiredMixin, SuccessMessageMixin,UpdateView):
     form_class = UpdateUserForm
     login_url = 'login'
@@ -115,6 +75,15 @@ class UpdateUserView(LoginRequiredMixin, SuccessMessageMixin,UpdateView):
     def get_object(self):
         return self.request.user
 
+class DeleteUserView(LoginRequiredMixin, SuccessMessageMixin,DeleteView):
+    form_class = UpdateUserForm
+    login_url = 'login'
+    template_name = "Autores/profile_update.html"
+    success_url = reverse_lazy('Home')
+    success_message = "User updated"
+
+    def get_object(self):
+        return self.request.user
     
 
 class PasswordChangeView(LoginRequiredMixin, PasswordChangeView):
@@ -136,4 +105,11 @@ class Blog(HttpRequest):
         return render(request,'Informacion/herencia.html')
 
     def en_creacion(request):
-            return render(request,'Informacion/en_creacion.html')
+        return render(request,'Informacion/en_creacion.html')
+
+
+def perfil(request, user_name):
+    #Se usa para almacenar especificamente el nombre de usuario en una variable y poder luego renderizarla,
+    #Esto se hace asi para poder mostrar los datos del perfil del autor
+    user_related_data = Autor.objects.filter(usuario__username = user_name)
+    return render(request, "Informacion/profile.html")

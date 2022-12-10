@@ -20,5 +20,5 @@ def crear_autor(sender, instance, created, **kwargs):
             nombre=instance.first_name,
             apellido=instance.last_name,
             correo=instance.email
-        )
+        ),print('Autor creado ')
 

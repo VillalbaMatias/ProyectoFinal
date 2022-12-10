@@ -3,10 +3,27 @@
 {% load static %}
 
 {% block formularioDinamico %}
-    <h1> Creacion de Post </h1>
-    <form action="" method="post" enctype="multipart/form-data">{% csrf_token %}
-        {{form.media}}
-        {{form.as_p}}
-        <button type="submit">Postear</button>
-    </form>
+<style>
+    .card {
+        margin: 0 auto;
+        /* Added */
+        float: none;
+        /* Added */
+        margin-bottom: 10px;
+        /* Added */
+    }
+</style>
+
+<form action="" method="post" enctype="multipart/form-data">{% csrf_token %}
+    {{form.media}}
+    {{form.as_p}}
+
+    <button type="submit">Postear</button>
+</form>
+
+<script>
+    var name = "{{user.id}}"
+    document.getElementById("autor").value = name;
+</script>
+
 {% endblock %}

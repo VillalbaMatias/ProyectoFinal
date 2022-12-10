@@ -23,15 +23,17 @@
                 <a class="btn btn-primary" href="{% url 'Home' %}">Home</a>
                 <a class="btn btn-primary" href="{% url 'AddPost' %}">Agregar Post</a>
                 <a class="btn btn-primary" href="{% url 'ListPost' %}">Ver Posts</a>
-                <a class="btn btn-primary" href="{% url 'EditUser' %}">Modificar Perfil</a>
+
                 {% if request.user.is_authenticated %}
+                <a class="btn btn-primary" href="{% url 'perfil' user.username %}">Ver Perfil</a>
+
                     <div class="dropdown">
                         <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                             {{user.username}}
                         </a>
                         
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <li><a class="dropdown-item" href="#">Perfil</a></li>
+                            <li><a class="dropdown-item" href="{% url 'EditUser' %}">Editar Perfil</a></li>
                             <li><a class="dropdown-item" href="{% url 'changePassword' %}">Cambio de Clave</a></li>
                             {% if request.user.is_superuser %}
                             <li><a class="dropdown-item" href="{% url 'admin:index' %}">Admin</a></li>
@@ -69,14 +71,6 @@
                             <li class="list-inline-item me-4">
                                 <a href="https://www.linkedin.com/in/matias-villalba-portunato-68b21b176/"><i class="bi bi-linkedin"></i></a>
                             </li>
-                            <li class="list-inline-item me-4">
-                                <a href="#!"><i class="bi-facebook fs-3"></i></a>
-                            </li>
-                            <li class="list-inline-item me-4">
-                                <a href="#!"><i class="bi-twitter fs-3"></i></a>
-                            </li>
-                            <li class="list-inline-item me-4">
-                                <a href="#!"><i class="bi-instagram fs-3"></i></a>
                             </li>
                         </ul>
                     </div>

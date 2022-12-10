@@ -2,7 +2,7 @@ from django import forms
 from .models import Post, Autor, Categoria
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, PasswordChangeForm
-
+from django.forms import HiddenInput
 
 
 class SingUpForm(UserCreationForm):
@@ -30,7 +30,7 @@ class CrearPostForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = '__all__'
-        
+
 
 class UpdateUserForm(UserChangeForm):
 
@@ -65,17 +65,17 @@ class CambioPasswordForm(PasswordChangeForm):
     old_password = forms.CharField(
         widget=forms.PasswordInput(attrs={
             'class': 'form-control', 
-            'placeholder': 'Old Password'}))
+            'placeholder': 'Vieja contraseña'}))
 
     new_password1 = forms.CharField(
         widget=forms.PasswordInput(attrs={
             'class': 'form-control', 
-            'placeholder': 'New Passowrd'}))
+            'placeholder': 'Nueva contraseña'}))
 
     new_password2 = forms.CharField(
         widget=forms.PasswordInput(attrs={
             'class': 'form-control', 
-            'placeholder': 'Conform new password'}))
+            'placeholder': 'Confirme la nueva contraseña'}))
             
     class Meta:
         model = User
@@ -84,11 +84,3 @@ class CambioPasswordForm(PasswordChangeForm):
 
 
 
-
-
-
-
-class CrearAutorForm(forms.ModelForm):
-    class Meta:
-        model = Autor
-        fields = '__all__'

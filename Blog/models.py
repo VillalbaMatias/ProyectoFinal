@@ -30,6 +30,7 @@ class Post(models.Model):
         return self.titulo + ' | ' + str(self.autor)
 
 
+
 class Autor(models.Model):
     usuario = models.OneToOneField(User, on_delete=models.CASCADE)
     nombre = models.CharField('Nombre de Autor',max_length=255, null= False, blank=False)
