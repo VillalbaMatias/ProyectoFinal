@@ -15,7 +15,9 @@
 <div class="card border-primary mb-3" style="max-width: 50rem;">
     <div class="card-header">{{post.post_date}} - {{post.autor.first_name}}{{post.autor.last_name}} - {{post.categoria}} </div>
     <div class="card-body text-primary">
+        {% if post.imagen.url is not None %}
         <img src="{{post.imagen.url}}" style="width:100%">
+        {% endif %}
         <h5 class="card-title">{{post.titulo}}</h5>
         <p class="card-text">{{post.cuerpo | safe }}</p>
     </div>

@@ -42,7 +42,7 @@ class AdmingLogoutView(LogoutView):
     template_name = 'Login_Logout_Register/logout.html'
 
 #Creacion de post
-class PostCreateView(SuccessMessageMixin, CreateView):
+class PostCreateView(SuccessMessageMixin, LoginRequiredMixin,CreateView):
     form_class = CrearPostForm
     template_name = "Blog/post_form.html"
     success_url = reverse_lazy('ListPost')
@@ -52,12 +52,12 @@ class PostCreateView(SuccessMessageMixin, CreateView):
         return redirect('AddPost')
 
 #Visualizacion de Posts creados
-class PostList(ListView):
+class PostList(LoginRequiredMixin,ListView):
     model = Post
     template_name = 'Blog/post_list.html'
 
 #Detalle de cada Post
-class PostDetailView(DetailView):
+class PostDetailView(LoginRequiredMixin, DetailView):
     model = Post
     template_name = 'Blog/post_detail.html'
 

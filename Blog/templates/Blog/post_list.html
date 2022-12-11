@@ -28,9 +28,11 @@
 {% for post in object_list %}
         <div class="card border-primary mb-3" style="max-width: 40rem;">
             <div class="card-header">{{post.titulo}}, {{post.autor}}</div>
+            {% if post.imagen.url is not None %}
             <div class="card-body text-primary">
                 <img src="{{post.imagen.url}}" style="width:60%" class="center">
             </div>
+            {% endif %}
             <div class="card-footer bg-transparent border-primary">
                 <a class="btn btn-primary" href="{% url 'Detail' post.id %}">Detalle</a>
                 {% if user.id == post.autor.id  %}
