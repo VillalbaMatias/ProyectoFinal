@@ -1,3 +1,8 @@
+
+{% extends 'index.html' %}
+{% load static %}
+
+{% block formularioDinamico %}
 <style>
     .card {
         margin: 0 auto; /* Added */
@@ -11,10 +16,6 @@
         width: 50%;
     }
 </style>
-{% extends 'index.html' %}
-{% load static %}
-
-{% block formularioDinamico %}
 
 {% if messages %}
     {% for message in messages%}
@@ -32,6 +33,8 @@
             <div class="card-body text-primary">
                 <img src="{{post.imagen.url}}" style="width:60%" class="center">
             </div>
+            {% else %}
+                <p class="card-text" align=center>No hay imagen</p>
             {% endif %}
             <div class="card-footer bg-transparent border-primary">
                 <a class="btn btn-primary" href="{% url 'Detail' post.id %}">Detalle</a>

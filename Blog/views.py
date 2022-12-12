@@ -61,14 +61,16 @@ class PostDetailView(LoginRequiredMixin, DetailView):
     model = Post
     template_name = 'Blog/post_detail.html'
 
-class PostUpdateView(UpdateView):
+class PostUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Post
     success_url = 'Blog/post_detail.html'
     fields = ['titulo','autor','cuerpo','imagen','post_date','categoria']
 
-class PostDeleteView(DeleteView):
+class PostDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     model = Post
-    success_url = 'Blog/post_list.html'
+    template_name = "Blog/post_confirm_delete.html"
+    success_url = reverse_lazy('ListPost')
+    success_message = 'Post Eliminado Correctamente'
 
 
 #Actualiza la informacion basica del usuario
@@ -76,14 +78,14 @@ class UpdateUserView(LoginRequiredMixin, SuccessMessageMixin,UpdateView):
     form_class = UpdateUserForm
     login_url = 'login'
     template_name = "Autores/profile_update.html"
-    success_url = reverse_lazy('Home')
+    success_url = reverse_lazy('EditUser')
     success_message = "Usuario actualizado"
 
     def get_object(self):
         return self.request.user
 
 
-class DeleteUserView(DeleteView):
+class DeleteUserView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     model = User
     template_name = "Autores/delete_autor_confirm.html"
     success_url = reverse_lazy('Home')

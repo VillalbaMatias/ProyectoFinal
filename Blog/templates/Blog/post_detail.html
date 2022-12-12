@@ -10,6 +10,12 @@
         float: none; /* Added */
         margin-bottom: 10px; /* Added */
     }
+    .center {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%;
+    }
 </style>
     
 <div class="card border-primary mb-3" style="max-width: 50rem;">
@@ -17,6 +23,8 @@
     <div class="card-body text-primary">
         {% if post.imagen.url is not None %}
         <img src="{{post.imagen.url}}" style="width:100%">
+        {% else %}
+            <p class="card-text">No hay imagen</p>
         {% endif %}
         <h5 class="card-title">{{post.titulo}}</h5>
         <p class="card-text">{{post.cuerpo | safe }}</p>

@@ -29,7 +29,7 @@ class CrearPostForm(forms.ModelForm):
         model = Post
         fields = ['titulo','autor','cuerpo','imagen','post_date','categoria']
         widgets = {
-            'autor': forms.TextInput(attrs={'value':'', 'id':'autor', 'type':'hidden'})
+            'autor': forms.TextInput(attrs={'value':'', 'id':'autor', 'type':'hidden'}),
             
         }
 #Formulario para actualizar el perfil del usuario
