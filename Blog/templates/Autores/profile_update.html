@@ -27,4 +27,8 @@
         {{form.as_p}}
         <button type="submit">Actualizar</button>
     </form>
+    <script>
+        var name = "{{user.id}}"
+        document.getElementById("autor").value = name;
+    </script>
 {% endblock %}

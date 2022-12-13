@@ -1,4 +1,11 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block formularioDinamico %}
 <form method="post"> {% csrf_token %}
-    <p>¿Estas seguro que desas eliminar tu usuario? {{object}}?</p>
+    <h1>¿Estas seguro que desas eliminar tu usuario: {{object}}?</h1>
     <input type="submit" value="Eliminar">
 </form>
+<br>
+<a class="btn btn-primary" href="{% url 'perfil' user.username %}">Regresar</a>
+{% endblock %}

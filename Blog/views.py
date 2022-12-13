@@ -63,8 +63,9 @@ class PostDetailView(LoginRequiredMixin, DetailView):
 #Update de cada Post
 class PostUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Post
-    success_url = 'Blog/post_detail.html'
+    success_url = reverse_lazy('ListPost')
     fields = ['titulo','autor','cuerpo','imagen','post_date','categoria']
+    success_message = 'Post Actualizado Correctamente'
 
 #Eliminacion de Post
 class PostDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
