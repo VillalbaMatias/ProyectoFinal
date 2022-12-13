@@ -1,15 +1,18 @@
-# ProyectoFinal
+# Proyecto Final 
+Realizado por Villalba Portunato Matias
 
-El proyecto esta basado en un Blog/Foro, en donde los usuarios pueden registrarse, loguearse y crear Publicaciones o Posts,
+El proyecto esta basado en un Blog/Foro, en donde los usuarios pueden registrarse, 
+loguearse y crear Publicaciones(Posts) las cuales las van a poder visualizar a todas,
 las categorias estan pre establecidas por el administrador de la pagina.
 
 Una vez creado las publicaciones(Posts), estos van a poder verse en el boton del navbar.
 Luego pueden ver con mas detalle cada una para poder ver el contenido escrito por los autores,
 podran ser eliminados o actualizados solo si el autor creo dicho Post.
 
-Tambien puede actualizar la informacion del perfil, cambiar la clave, eliminar el usuario y desloguearse.
+Tambien puede actualizar la informacion del perfil, cambiar la clave, eliminar el usuario y
+desloguearse.
 
-
+Por fines didacticos se hay un usuario administrador, user: admin y clave: admin
 
 
 
@@ -37,6 +40,11 @@ las opciones: Perfil, Admin, Logout.
 La opcion de Admin solo sera visible si el usuario es superusuario, sino no es visible.
 
 Las otras opciones seran explicadas mas abajo
+
+### Agregar Post
+Este boton nos va a servir cuando estemos logueados poder crear nuestro Post el cual 
+nos va a pedir unos datos para poder crearlo, luego nos rededirigira a los Posts ya
+creados
 ## Ver Posts
 
 Cuando vayamos a ver los posts creados por los usuarios veremos que podremos ver el detalle, elimianar o actualizar
@@ -73,6 +81,23 @@ El usuario podra cerrar sesion de su cuenta, cuando suceda eso se lo va a rediri
 donde va a encontrarse con un template diciendo: Has cerrado sesion
 
 
+## Botones: Informacion
+
+Estos botones se componen de 5, en el cual se encuentran el About, Contact, Terms Of Use,
+Privacy Policy y el de LinkedIn.
+
+### About
+Este boton muestra un poco sobre el autor del proyecto final, el trabajo que esta realizando
+y un poco su meta a futuro.
+
+### Contact ; Terms of Use ; Privacy Policy
+
+Estos se encuentran por el momento sin informacion, con lo cual se renderiza en los 3
+un html que dice: No hay paginas aun
+
+### LinkedIn
+
+Este boton al hacer click nos lleva al LinkedIn del autor del proyecto
 ## Installation
 
 ### virtualenv
@@ -100,7 +125,9 @@ Una vez activo entramos a la carpeta MVT
   cd MVT
 
 ```
-Y por ultimo iniciamos el servidor con este comando:
+Y por ultimo iniciamos el servidor con este comando (este paso lo realizaremos Luego
+de haber leido los demas pasos de instalacion ya que sino nos dara error al querer
+iniciar nuestro servidor):
 ```
   python manage.py runserver
 
@@ -108,6 +135,10 @@ Y por ultimo iniciamos el servidor con este comando:
 
 ### Decouple
 
+Para instalar decouple necesitaremos ejecutar lo siguiente:
+```
+pip install python-decouple
+```
 Lo que se va a realizar a continuacion se hace para poder nosotros poder hacer un gitignore
 al archivo .env que vamo a crear y asi no subir a github nuestra SECRET_KEY y el DEBUG
 
@@ -158,8 +189,8 @@ pip install Pillow
 
 ### ckeditor
 
-Por ultimo se debe de instalar ckeditor para la manipulacion del texto, ya que tiene
-herramientas para poner en negrita, adjuntar fotos, etc.
+Por ultimo se debe de instalar ckeditor en el entorno virtual para la manipulacion del
+texto, ya que tiene herramientas para poner en negrita, adjuntar fotos, etc.
 ```
 pip install django-ckeditor
 ```
@@ -175,6 +206,13 @@ abrir Django, de igual manera se va a ampliar mas en un futuro.
 
 ## About Us
 
-El proyecto fue realizado de manera individual, solamente por mi: 
+Actualmente me ocupo trabajando como soporte nivel 1 en una empresa terciarizada para la
+cuenta de MercadoLibre.
+
+Entre a coderhouse para poder desempeñarme en un futuro cercano como desarrollador backend
+
+El proyecto fue realizado de manera individual, solamente por mi, ya que no tuve grupo:
+
+
 
 Villalba Portunato Matias
