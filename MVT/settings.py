@@ -135,3 +135,4 @@ MEDIA_URL = '/media/'
 MEDIA_DIR = os.path.join(BASE_DIR, 'media')
 
 MEDIA_ROOT = MEDIA_DIR # se sustituye por os.path.join(BASE_DIR, 'media')
+

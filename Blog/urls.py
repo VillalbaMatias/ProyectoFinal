@@ -18,9 +18,9 @@ urlpatterns = [
     path('editar_usuario/', views.UpdateUserView.as_view(), name='EditUser'),
     path('cambiar_password/', views.PasswordChangeView.as_view(), name='changePassword'),
     path('password_success/', views.password_success, name="password_success"),
-    path('ver_perfil/<str:user_name>/', views.perfil, name="perfil"),
+    path('ver_perfil/<str:user_name>/', views.Blog.perfil, name="perfil"),
     path('eliminar_usuario/<pk>/', views.DeleteUserView.as_view(), name="deleteUser"),
-
+    
 
 
 ]

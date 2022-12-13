@@ -1,4 +1,12 @@
+{% extends 'index.html' %}
+
+{% load static %}
+
+{% block formularioDinamico %}
 <form method="post"> {% csrf_token %}
-    <p>¿Estas seguro que desas eliminar este post? {{object}}?</p>
+    <h1>¿Estas seguro que deseas eliminar este post: {{post.titulo}}?</h1>
     <input type="submit" value="Eliminar">
 </form>
+<br>
+<a class="btn btn-primary" href="{% url 'ListPost' %}">Regresar</a>
+{% endblock %}

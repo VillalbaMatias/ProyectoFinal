@@ -3,6 +3,7 @@ from .models import Post, Autor
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, PasswordChangeForm
 
+#Formulario de registro de usuario
 class SingUpForm(UserCreationForm):
 
     class Meta: 
@@ -24,6 +25,7 @@ class SingUpForm(UserCreationForm):
             'password2':'Confirmacion de la Contraseña'
         }
 
+#Formulario para crear post
 class CrearPostForm(forms.ModelForm):
     class Meta:
         model = Post

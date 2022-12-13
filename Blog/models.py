@@ -26,7 +26,7 @@ class Post(models.Model):
     imagen = models.ImageField('Imagen', null= True, blank=True, upload_to='images/')
 
     def __str__(self):
-        return self.titulo + ' | ' + str(self.autor)
+        return 'Titulo: '+ self.titulo + ' |  Autor: '  + str(self.autor)
 
 
 
